@@ -18,7 +18,7 @@ def getRandomName(aprefix):
     return aprefix + random.choice(names) + str(random.randint(0,100000))
 
 def getRandomPass():
-    return str(random.randint(1000,100000000)) + "asdazasgdhjasdhgasdhgasdghjadiuasjudhsd"
+    return str(random.randint(1000,100000000)) + "asdazasgdhjasdhgjadiuasjudhsd"
 
 def cooldown(t):
     for remaining in range(t,0,-1):
@@ -93,6 +93,7 @@ def run(aprefix):
     sleep()
     py.click(1033,444)
     sleep()
+    email = pyperclip.paste()
 
     #browser1
     py.click(150,10)
@@ -151,7 +152,7 @@ def run(aprefix):
     nr += 1
     #write in file
     f = open('accounts.txt',"a")
-    f.write(username + ':' + password + ":" + pyperclip.paste() + '\n')
+    f.write(username + ' : ' + password + ' : ' + email + '\n')
     f.close()
 
     #refresh

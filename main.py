@@ -44,10 +44,13 @@ if (selection == '1'):
     print("Step 1: open your browser fullscreen 1920x1080 on your main screen")
     print('Step 2: In the first tab open "twitch.tv", in the second "muellmail.com"')
     print()
-    print("After, please put some names in the generated names.txt file (one name per line) - press keyboard when ready")
+    print("After, please put some names in the generated names.txt file (one name per line) - press ENTER when ready")
     input()
     while(True):
-        print("how many accounts should be created? (0 is forever)")
+        print("What prefix you want to have?")
+        aprefix = input()
+        print()
+        print("How many accounts should be created? (0 is forever)")
         count = input()
         try:
             val = int(count)
@@ -60,7 +63,7 @@ if (selection == '1'):
     print("Now focus twitch and don't move your mouse from now on!!")
     cooldown(5)
     print("Let's Start!")
-    create(int(count))
+    create(aprefix, int(count))
 
 if (selection == '2'):
     print(22)

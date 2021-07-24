@@ -13,22 +13,22 @@ def sleep():
 def type(text):
     py.write(text)
 
-def getRandomName():
-    return 'KumbaiDu' + random.choice(names) + str(random.randint(0,100000))
+def getRandomName(aprefix):
+    return aprefix + random.choice(names) + str(random.randint(0,100000))
 
 def getRandomPass():
     return str(random.randint(1000,100000000)) + "asdazasgdhjasdhgasdhgasdghjadiuasjudhsd"
 
-def cooldown(time):
-    for remaining in range(time,0,-1):
+def cooldown(t):
+    for remaining in range(t,0,-1):
         sys.stdout.write("\r")
         sys.stdout.write("{:2d} seconds remaining...".format(remaining))
         sys.stdout.flush()
         time.sleep(1)
 
-def cooldownLong(time):
+def cooldownLong(t):
     state = 1
-    for remaining in range(time,0,-1):
+    for remaining in range(t,0,-1):
         sys.stdout.write("\r")
         if(state == 1):
             sys.stdout.write("{:2d} seconds remaining.".format(remaining))
@@ -42,7 +42,7 @@ def cooldownLong(time):
         sys.stdout.flush()
         time.sleep(1)
 
-def run():
+def run(aprefix):
     search = Search("../captcha.png")
     nr = 1
     #sign up
@@ -50,7 +50,7 @@ def run():
     sleep()
     #username (check if username already exists)
     while(True):
-        username = getRandomName()
+        username = getRandomName(aprefix)
         with open('accounts.txt') as f:
             if username in f.read():
                 print("assign new name")
@@ -96,13 +96,6 @@ def run():
     #browser1
     py.click(150,10)
     sleep()
-    #check if captcha is here
-    pos = search.imagesearch()
-    if pos[0] != -1:
-        py.click(85,45)
-        print("captcha, try again")
-        cooldownLong(600)
-        return
     #email
     py.click(800,700)
     sleep()
@@ -132,8 +125,14 @@ def run():
     #browser1
     py.click(150,10)
     sleep()
+    #check if captcha is here
+    if py.locateOnScreen('captcha.png') != None:
+        py.click(85,45)
+        print("captcha found, try again")
+        cooldownLong(600)
+        return
     py.click(828,551)
-    py.click(button='right')
+    py.click(button='right') 
     sleep()
     py.click(850,700)
     time.sleep(10)
@@ -151,17 +150,17 @@ def run():
     f = open('accounts.txt',"a")
     f.write(username + ':' + password + '\n')
     f.close()
-    
+
     cooldownLong(600)
     print("done")
 
-def create(count):
+def create(aprefix,count):
     if count == 0:
         while (True):
-            run()
+            run(aprefix)
     else:
         cur = 0
         while cur <= count:
-            run()
+            run(aprefix)
             cur += 1
             print("All done!")

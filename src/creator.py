@@ -103,13 +103,14 @@ def run(aprefix):
     py.click(button='right')
     py.click(860,850)
     sleep()
+    #submit
     py.click(860,817)
-    time.sleep(2)
+    time.sleep(5)
 
     #confirm email
     #browser2
     py.click(344,13)
-    time.sleep(20)
+    time.sleep(18)
     py.click(500,500)
     sleep()
     py.click(710,510)
@@ -126,7 +127,7 @@ def run(aprefix):
     py.click(150,10)
     sleep()
     #check if captcha is here
-    if py.locateOnScreen('captcha.png') != None:
+    if py.locateOnScreen('src/captcha.png') != None:
         py.click(85,45)
         print("captcha found, try again")
         cooldownLong(600)
@@ -163,4 +164,4 @@ def create(aprefix,count):
         while cur <= count:
             run(aprefix)
             cur += 1
-            print("All done!")
+        print("All done!")

@@ -1,3 +1,4 @@
+from screen_search import *
 import pyautogui as py
 import time
 import random
@@ -18,8 +19,31 @@ def getRandomName():
 def getRandomPass():
     return str(random.randint(1000,100000000)) + "asdazasgdhjasdhgasdhgasdghjadiuasjudhsd"
 
-def run():
+def cooldown(time):
+    for remaining in range(time,0,-1):
+        sys.stdout.write("\r")
+        sys.stdout.write("{:2d} seconds remaining...".format(remaining))
+        sys.stdout.flush()
+        time.sleep(1)
+
+def cooldownLong(time):
     state = 1
+    for remaining in range(time,0,-1):
+        sys.stdout.write("\r")
+        if(state == 1):
+            sys.stdout.write("{:2d} seconds remaining.".format(remaining))
+            state += 1
+        elif(state == 2):
+            sys.stdout.write("{:2d} seconds remaining..".format(remaining))
+            state += 1
+        elif(state == 3):
+            sys.stdout.write("{:2d} seconds remaining...".format(remaining))
+            state = 1
+        sys.stdout.flush()
+        time.sleep(1)
+
+def run():
+    search = Search("../captcha.png")
     nr = 1
     #sign up
     py.click(1839,90)
@@ -34,9 +58,6 @@ def run():
                 f.close()
                 break
     password = getRandomPass()
-    f = open('accounts.txt',"a")
-    f.write(username + ':' + password + '\n')
-    f.close()
     type(username)
     sleep()
     #password
@@ -75,6 +96,13 @@ def run():
     #browser1
     py.click(150,10)
     sleep()
+    #check if captcha is here
+    pos = search.imagesearch()
+    if pos[0] != -1:
+        py.click(85,45)
+        print("captcha, try again")
+        cooldownLong(600)
+        return
     #email
     py.click(800,700)
     sleep()
@@ -119,18 +147,12 @@ def run():
     #end
     print("made account: " + str(nr) + " - " + str(username))
     nr += 1
-    for remaining in range(600,0,-1):
-        if(state == 1):
-            sys.stdout.write("\r {:2d} seconds remaining.".format(remaining))
-            state += 1
-        elif(state == 2):
-            sys.stdout.write("\r {:2d} seconds remaining..".format(remaining))
-            state += 1
-        elif(state == 3):
-            sys.stdout.write("\r {:2d} seconds remaining...".format(remaining))
-            state = 1
-        sys.stdout.flush()
-        time.sleep(1)
+    #write in file
+    f = open('accounts.txt',"a")
+    f.write(username + ':' + password + '\n')
+    f.close()
+    
+    cooldownLong(600)
     print("done")
 
 def create(count):
@@ -142,3 +164,4 @@ def create(count):
         while cur <= count:
             run()
             cur += 1
+            print("All done!")

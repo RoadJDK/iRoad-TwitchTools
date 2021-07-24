@@ -35,6 +35,8 @@ while(True):
         print("not a valid selection...")
 
 if (selection == '1'):
+    print("Step 1: open your browser fullscreen 1920x1080 on your main screen")
+    print('Step 2: In the first tab open "twitch.tv", in the second "muellmail.com"')
     print("please put some names in the generated names.txt file (one name per line) - press keyboard when ready")
     input()
     while(True):
@@ -48,6 +50,7 @@ if (selection == '1'):
                 print("not a valid number...")
         except ValueError:
             print("not a valid number...")
+    print("Now focus twitch and don't move your mouse from now on!!")
     for remaining in range(5,0,-1):
         sys.stdout.write("\r{:2d} seconds remaining...".format(remaining))
         sys.stdout.flush()

@@ -14,9 +14,15 @@ filename.touch(exist_ok=True)
 filename = Path('phrases.txt')
 filename.touch(exist_ok=True)
 
-print("Hi")
-print()
-print("Welcome to TwitchTools!")
+print(rf"""
+    ___                      _ 
+ _ |  _`\                   ( )
+(_)| (_) )   _      _ _    _| |
+| || ,  /  /'_`\  /'_` ) /'_` |
+| || |\ \ ( (_) )( (_| |( (_| |
+(_)(_) (_)`\___/'`\__,_)`\__,_)
+""")
+print("Welcome to iRoad TwitchTools!")
 print("Please select one of the following options:")
 print("1 - Account Creator")
 print("2 - Stream Annoyance")

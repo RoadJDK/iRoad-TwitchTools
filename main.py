@@ -1,10 +1,10 @@
-from src.creator import create, cooldown
+from src.creator import create
+from src.chatter import chat
+from src.common import cooldown
 
 from colorama import Fore
 from pathlib import Path
 import colorama
-import time
-import sys
 import os
 
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -75,7 +75,10 @@ if (selection == '1'):
     create(aprefix, int(count))
 
 if (selection == '2'):
-    print("not implemented yet")
+    print("Now focus twitch and don't move your mouse from now on!!")
+    cooldown(5)
+    print("Let's Start!")
+    chat('kumbai')
     
 if (selection == '3'):
     print("not implemented yet")

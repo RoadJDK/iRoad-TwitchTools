@@ -1,47 +1,18 @@
 from screen_search import *
+from src.common import cooldownLong, sleep, typeText
 import pyautogui as py
 import pyperclip
 import time
 import random
-import sys
 
 with open('names.txt') as f:
     names = f.read().splitlines()
-
-def sleep():
-    time.sleep(0.8)
-
-def type(text):
-    py.write(text)
 
 def getRandomName(aprefix):
     return aprefix + random.choice(names) + str(random.randint(0,100000))
 
 def getRandomPass():
     return str(random.randint(1000,100000000)) + "asdazasgdhjasdhgjadiuasjudhsd"
-
-def cooldown(t):
-    for remaining in range(t,0,-1):
-        sys.stdout.write("\r")
-        sys.stdout.write("{:2d} seconds remaining...".format(remaining))
-        sys.stdout.flush()
-        time.sleep(1)
-
-def cooldownLong(t):
-    state = 1
-    for remaining in range(t,0,-1):
-        sys.stdout.write("\r")
-        if(state == 1):
-            sys.stdout.write("{:2d} seconds remaining.".format(remaining))
-            state += 1
-        elif(state == 2):
-            sys.stdout.write("{:2d} seconds remaining..".format(remaining))
-            state += 1
-        elif(state == 3):
-            sys.stdout.write("{:2d} seconds remaining...".format(remaining))
-            state = 1
-        sys.stdout.flush()
-        time.sleep(1)
 
 def run(aprefix):
     search = Search("../captcha.png")
@@ -59,17 +30,17 @@ def run(aprefix):
                 f.close()
                 break
     password = getRandomPass()
-    type(username)
+    typeText(username)
     sleep()
     #password
     py.click(800,500)
     sleep()
-    type(password)
+    typeText(password)
     sleep()
     #password confirm
     py.click(800,560)
     sleep()
-    type(password)
+    typeText(password)
     sleep()
     #month
     py.click(834,628)
@@ -78,11 +49,11 @@ def run(aprefix):
     sleep()
     #day
     py.click(980,618)
-    type('3')
+    typeText('3')
     sleep()
     #year
     py.click(1100,618)
-    type('2000')
+    typeText('2000')
     sleep()
 
     #GET EMAIL
@@ -152,7 +123,7 @@ def run(aprefix):
     nr += 1
     #write in file
     f = open('accounts.txt',"a")
-    f.write(username + ' : ' + password + ' : ' + email + '\n')
+    f.write(username + ':' + password + ':' + email + '\n')
     f.close()
 
     #refresh

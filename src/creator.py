@@ -1,5 +1,6 @@
 from screen_search import *
 import pyautogui as py
+import pyperclip
 import time
 import random
 import sys
@@ -150,7 +151,7 @@ def run(aprefix):
     nr += 1
     #write in file
     f = open('accounts.txt',"a")
-    f.write(username + ':' + password + '\n')
+    f.write(username + ':' + password + ":" + pyperclip.paste() + '\n')
     f.close()
 
     #refresh

@@ -8,7 +8,7 @@ with open('names.txt') as f:
     names = f.read().splitlines()
 
 def sleep():
-    time.sleep(0.7)
+    time.sleep(0.8)
 
 def type(text):
     py.write(text)
@@ -128,6 +128,7 @@ def run(aprefix):
     sleep()
     #check if captcha is here
     if py.locateOnScreen('src/captcha.png') != None:
+        #refresh
         py.click(85,45)
         print("captcha found, try again")
         cooldownLong(600)
@@ -152,7 +153,12 @@ def run(aprefix):
     f.write(username + ':' + password + '\n')
     f.close()
 
+    #refresh
+    py.click(85,45)
     cooldownLong(600)
+    #refresh
+    py.click(85,45)
+    sleep()
     print("done")
 
 def create(aprefix,count):

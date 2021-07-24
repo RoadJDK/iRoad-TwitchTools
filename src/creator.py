@@ -1,10 +1,10 @@
-from pathlib import Path
 import pyautogui as py
 import time
 import random
 import sys
 
-names = ['Noob', 'Pleb', 'Anfaenger', 'Kaninchen', 'Hund', 'Kek', 'Vogel', 'Lappen', 'Ehrenmann', 'Katze', 'Hund', 'Labertasche', 'Drache', 'Frechdachs', 'Pferd']
+with open('names.txt') as f:
+    names = f.read().splitlines()
 
 def sleep():
     time.sleep(0.7)
@@ -13,20 +13,14 @@ def type(text):
     py.write(text)
 
 def getRandomName():
-    return 'KumbaiDu' + random.choice(names) + str(random.randint(0,100000000))
+    return 'KumbaiDu' + random.choice(names) + str(random.randint(0,100000))
 
 def getRandomPass():
     return str(random.randint(1000,100000000)) + "asdazasgdhjasdhgasdhgasdghjadiuasjudhsd"
 
-filename = Path('accounts.txt')
-filename.touch(exist_ok=True)
-
-#wait 5 seconds
-time.sleep(5)
-
-nr = 1
-
-while(True):
+def run():
+    state = 1
+    nr = 1
     #sign up
     py.click(1839,90)
     sleep()
@@ -125,7 +119,6 @@ while(True):
     #end
     print("made account: " + str(nr) + " - " + str(username))
     nr += 1
-    state = 1
     for remaining in range(600,0,-1):
         if(state == 1):
             sys.stdout.write("\r {:2d} seconds remaining.".format(remaining))
@@ -139,3 +132,13 @@ while(True):
         sys.stdout.flush()
         time.sleep(1)
     print("done")
+
+def create(count):
+    if count == 0:
+        while (True):
+            run()
+    else:
+        cur = 0
+        while cur <= count:
+            run()
+            cur += 1

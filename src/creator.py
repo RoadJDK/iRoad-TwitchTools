@@ -131,7 +131,7 @@ def run(aprefix):
         #refresh
         py.click(85,45)
         print("captcha found, try again")
-        cooldownLong(600)
+        cooldownLong(720)
         return
     py.click(828,551)
     py.click(button='right') 
@@ -155,7 +155,7 @@ def run(aprefix):
 
     #refresh
     py.click(85,45)
-    cooldownLong(600)
+    cooldownLong(720)
     #refresh
     py.click(85,45)
     sleep()
